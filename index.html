@@ -189,7 +189,7 @@
             border-radius: 22px;
             padding: 12px 18px;
             font-size: 1rem;
-            background: #fffdfa;
+            background: #fff;
             font-family: inherit;
             outline: none;
             transition: border-color 0.2s;
@@ -338,26 +338,26 @@
             gap: 0.2rem;
             margin-bottom: 2px;
         }
+        .calendar-row div,
         .calendar-header div {
-            font-size: 0.85rem;
-            font-family: 'Quicksand', Arial, sans-serif;
-            font-weight: 600;
-            color: #fff;
-            flex: 1 1 0;
-            text-align: center;
-            padding-bottom: 2px;
-        }
-        .calendar-row div {
-            font-size: 0.98rem;
-            font-family: 'Quicksand', Arial, sans-serif;
-            color: #fff;
-            background: none;
-            border-radius: 8px;
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            min-width: 26px;
+            max-width: 26px;
+            height: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 0.85rem;
+            padding: 0;
+            text-align: center;
+            box-sizing: border-box;
+            font-family: 'Quicksand', Arial, sans-serif;
+        }
+        .calendar-header div {
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding-bottom: 2px;
+            color: #fff;
         }
         .calendar-day.highlight {
             background: #fff;
@@ -459,11 +459,14 @@
             align-items: center;
             margin-bottom: 2.2rem;
             margin-top: 0.5rem;
-            gap: 16px;
+            gap: 12px;
+            max-width: 320px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .section-title-script {
             font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
+            font-size: 1.3rem;
             font-weight: 400;
             white-space: nowrap;
         }
@@ -472,8 +475,9 @@
             height: 2px;
             background: #222;
             display: block;
-            min-width: 30px;
-            margin-left: 12px;
+            min-width: 16px;
+            max-width: 60px;
+            margin-left: 8px;
             border-radius: 2px;
         }
         @media (max-width: 480px) {
@@ -555,13 +559,53 @@
             position: relative;
             top: -6px;
         }
+
+        .hero-img {
+            display: block;
+            margin: 0 auto 0.2rem auto;
+            max-width: 350px;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .modern-form select {
+            border: 1.2px solid #222;
+            border-radius: 22px;
+            padding: 12px 18px;
+            font-size: 1rem;
+            background: #fff;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+            color: #222;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23222' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+        
+        .modern-form select option {
+            background: #fff;
+            color: #222;
+        }
+        
+        .modern-form select:focus option:hover,
+        .modern-form select:focus option:focus,
+        .modern-form select:focus option:active,
+        .modern-form select:focus option:checked {
+            background: #f7e7b7;
+            color: #222;
+        }
     </style>
 </head>
 <body>
     <section class="hero">
-        <h1>Cảnh Đệ & Phương Nhung</h1>
-        <p class="save-date">Save The Date</p>
-        <p>04.07.2025</p>
+        <img class="hero-img" src="https://lh3.googleusercontent.com/d/1G30BIKaC2lutxbUrAUnm7fO_6sWavdES?authuser=1/view" alt="Cảnh Đệ & Phương Nhung" crossorigin="anonymous" />
         <div class="countdown">
             <div class="countdown-item">
                 <div class="countdown-number" id="days">00</div>
@@ -584,7 +628,7 @@
 
     <section class="invitation">
       <div class="invitation-content">
-        <div class="invitation-title">Thân mời!</div>
+        <img src="https://lh3.googleusercontent.com/d/1JACS5EKsddmghidHBRxJapyuDjURoL5P?authuser=1/view" alt="Thân mời!" style="max-width: 200px; width: 100%; margin-bottom: 0.2rem;" />
         <div class="invitation-subtitle">ĐẾN DỰ LỄ CƯỚI CỦA CHÚNG MÌNH</div>
         <div class="invitation-month">JULY</div>
         <div class="invitation-calendar">
@@ -592,24 +636,19 @@
             <div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div><div>SUN</div>
           </div>
           <div class="calendar-row">
-            <div></div><div></div><div></div><div></div><div></div><div>1</div><div>2</div>
+            <div></div><div>1</div><div>2</div><div>3</div><div class="calendar-day highlight">4</div><div>5</div><div>6</div>
           </div>
           <div class="calendar-row">
-            <div class="calendar-day highlight">3</div>
-            <div class="calendar-day highlight">4</div>
-            <div>5</div><div>6</div><div>7</div><div>8</div><div>9</div>
+            <div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div>
           </div>
           <div class="calendar-row">
-            <div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div>
+            <div>14</div><div>15</div><div>16</div><div>17</div><div>18</div><div>19</div><div>20</div>
           </div>
           <div class="calendar-row">
-            <div>17</div><div>18</div><div>19</div><div>20</div><div>21</div><div>22</div><div>23</div>
+            <div>21</div><div>22</div><div>23</div><div>24</div><div>25</div><div>26</div><div>27</div>
           </div>
           <div class="calendar-row">
-            <div>24</div><div>25</div><div>26</div><div>27</div><div>28</div><div>29</div><div>30</div>
-          </div>
-          <div class="calendar-row">
-            <div>31</div><div></div><div></div><div></div><div></div><div></div><div></div>
+            <div>28</div><div>29</div><div>30</div><div>31</div><div></div><div></div><div></div>
           </div>
         </div>
         <div class="invitation-desc">
@@ -635,7 +674,7 @@
         </div>
       </div>
       <div class="event-date-note">(Tức ngày 10 tháng 6 năm Giáp Thìn)</div>
-      <div class="event-title event-title-small">LỄ TÂN HÔN ĐƯỢC TỔ CHỨC<br>VÀO LÚC 11 GIỜ 00 PHÚT - NGÀY 03.07.2025<br>TẠI NHÀ HÀNG TIỆC CƯỚI HOÀNG HẢI</div>
+      <div class="event-title event-title-small">LỄ TÂN HÔN ĐƯỢC TỔ CHỨC<br>VÀO LÚC 11 GIỜ 00 PHÚT - NGÀY 04.07.2025<br>TẠI NHÀ HÀNG TIỆC CƯỚI HOÀNG HẢI</div>
       <div class="event-address">Địa chỉ: Xã Cát Minh, Huyện Phù Cát, Tỉnh Bình Định</div>
       <a class="event-map" href="#" target="_blank"><i class="fa fa-location-arrow"></i> CHỈ ĐƯỜNG</a>
     </section>
@@ -733,7 +772,7 @@
     </footer>
 
     <!-- Nhạc nền tự động -->
-    <audio id="bg-music" src="https://cdn.glitch.global/2e2e2e2e/anhnangcuaanh.mp3" autoplay loop></audio>
+    <audio id="bg-music" src="https://zingmp3.vn/bai-hat/Anh-Nang-Cua-Anh-Cho-Em-Den-Ngay-Mai-OST-Duc-Phuc/ZW78BW9D.html" autoplay loop></audio>
 
     <button id="music-toggle" aria-label="Tắt/mở nhạc" style="position:fixed;bottom:18px;right:18px;z-index:999;background:#fff;border-radius:50%;border:none;box-shadow:0 2px 8px #0002;padding:10px;cursor:pointer;">
       <i id="music-icon" class="fa fa-music" style="color:#b38f2a;font-size:1.2rem;"></i>
