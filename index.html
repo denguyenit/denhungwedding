@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cảnh Đệ & Phương Nhung</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        body, .modern-form input, .modern-form textarea, .modern-form select, .modern-form button {
+            font-family: 'Quicksand', Arial, sans-serif;
+        }
+
+        .hero {
+            min-height: 320px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-bottom: 0.2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero p.save-date {
+            font-family: 'Quicksand', Arial, sans-serif;
+            font-size: 1rem;
+            font-style: normal;
+            letter-spacing: 2px;
+            margin-bottom: 1.1rem;
+            text-transform: uppercase;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 1.2rem;
+            margin: 1.2rem 0 1.5rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .countdown-item {
+            text-align: center;
+            background: rgba(255,255,255,0.08);
+            padding: 0.7rem 0.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(3px);
+            min-width: 60px;
+        }
+
+        .countdown-number {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .countdown-label {
+            font-size: 0.85rem;
+            color: #fff;
+            margin-top: 0.2rem;
+        }
+
+        .section {
+            padding: 8rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #d4af37;
+        }
+
+        .modern-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            padding: 0 8px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        .gallery-block {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .gallery-block.row {
+            flex-direction: row;
+            gap: 12px;
+        }
+        .gallery-item {
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            background: #fff;
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: filter 0.2s;
+        }
+        .gallery-item.large {
+            aspect-ratio: 16/9;
+        }
+        .gallery-item.medium {
+            aspect-ratio: 4/5;
+        }
+        .gallery-item.small {
+            flex: 1;
+            aspect-ratio: 1/1;
+        }
+        .gallery-item:active,
+        .gallery-item:focus {
+            transform: scale(0.97);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+        }
+        .gallery-item::after {
+            content: '';
+            display: block;
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top,rgba(0,0,0,0.08),transparent 60%);
+            pointer-events: none;
+        }
+
+        .modern-form {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 14px 0;
+            background: #f7f7f7;
+            border-radius: 18px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        .modern-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .modern-form input,
+        .modern-form textarea,
+        .modern-form select {
+            border: 1.2px solid #222;
+            border-radius: 22px;
+            padding: 12px 18px;
+            font-size: 1rem;
+            background: #fffdfa;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .modern-form textarea {
+            min-height: 70px;
+            resize: vertical;
+            border-radius: 18px;
+        }
+        .modern-form input:focus,
+        .modern-form textarea:focus,
+        .modern-form select:focus {
+            border-color: #d4af37;
+        }
+        .modern-form button,
+        .modern-form button.secondary {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.15rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            padding: 7px 0;
+            border-radius: 14px;
+            border-width: 1px;
+        }
+        .modern-form button {
+            border: 1.2px solid #222;
+            border-radius: 22px;
+            background: #fffdfa;
+            color: #222;
+            padding: 12px 0;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .modern-form button:hover,
+        .modern-form button:focus {
+            background: #d4af37;
+            color: #fff;
+            border-color: #d4af37;
+        }
+        .modern-form button.secondary {
+            background: #fffdfa;
+            color: #222;
+            border: 1.2px solid #222;
+            margin-top: 2px;
+        }
+        .modern-form button.secondary:hover,
+        .modern-form button.secondary:focus {
+            background: #f7e7b7;
+            color: #222;
+            border-color: #d4af37;
+        }
+
+        .footer {
+            background: #fff;
+            color: #888;
+            text-align: center;
+            padding: 1.2rem 0 0.7rem 0;
+            position: relative;
+            font-family: 'Quicksand', Arial, sans-serif;
+            font-size: 0.98rem;
+            box-shadow: none;
+        }
+        .footer-line {
+            width: 60px;
+            height: 2px;
+            background: #e0e0e0;
+            margin: 0 auto 0.7rem auto;
+            border-radius: 2px;
+        }
+        .footer-names {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.25rem;
+            color: #b38f2a;
+            margin-bottom: 0.1rem;
+        }
+        .footer-year {
+            font-size: 0.95rem;
+            color: #aaa;
+            letter-spacing: 2px;
+        }
+
+        .thank-message {
+            margin-top: 8px;
+            text-align: center;
+            font-family: 'Quicksand', Arial, sans-serif;
+            font-size: 0.98rem;
+            color: #888;
+            font-weight: 500;
+        }
+
+        .section .modern-form {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .invitation {
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+            color: #fff;
+            padding: 2.2rem 1rem 1.5rem 1rem;
+            border-radius: 18px;
+            max-width: 480px;
+            margin: 1.2rem auto 0 auto;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+        }
+        .invitation-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            margin-bottom: 0.2rem;
+            font-weight: 400;
+        }
+        .invitation-subtitle {
+            font-family: 'Quicksand', Arial, sans-serif;
+            font-size: 1.05rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 0.7rem;
+            font-weight: 500;
+        }
+        .invitation-month {
+            font-family: 'Quicksand', Arial, sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            letter-spacing: 2px;
+            margin-bottom: 1.2rem;
+            font-weight: 500;
+        }
+        .invitation-desc {
+            font-size: 0.98rem;
+            color: #f3f3f3;
+            margin-top: 1.1rem;
+            line-height: 1.6;
+            font-family: 'Quicksand', Arial, sans-serif;
+        }
+        .invitation-calendar {
+            background: rgba(255,255,255,0.13);
+            border-radius: 14px;
+            padding: 0.7rem 0.3rem 0.5rem 0.3rem;
+            margin: 0.7rem auto 0.7rem auto;
+            max-width: 340px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+        }
+        .calendar-row {
+            display: flex;
+            justify-content: center;
+            gap: 0.2rem;
+            margin-bottom: 2px;
+        }
+        .calendar-header div {
+            font-size: 0.85rem;
+            font-family: 'Quicksand', Arial, sans-serif;
+            font-weight: 600;
+            color: #fff;
+            flex: 1 1 0;
+            text-align: center;
+            padding-bottom: 2px;
+        }
+        .calendar-row div {
+            font-size: 0.98rem;
+            font-family: 'Quicksand', Arial, sans-serif;
+            color: #fff;
+            background: none;
+            border-radius: 8px;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .calendar-day.highlight {
+            background: #fff;
+            color: #b38f2a;
+            font-weight: 700;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        .event-info {
+            background: #faf9f7;
+            border-radius: 18px;
+            max-width: 480px;
+            margin: 1.2rem auto 0 auto;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            padding: 2.2rem 1rem 1.5rem 1rem;
+            font-family: 'Quicksand', Arial, sans-serif;
+        }
+        .event-title {
+            font-size: 1.08rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 1.1rem;
+            text-transform: uppercase;
+        }
+        .event-title-small {
+            font-size: 1.01rem;
+            font-weight: 500;
+            margin-top: 1.2rem;
+            margin-bottom: 1.1rem;
+        }
+        .event-date-row {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 18px;
+            margin-bottom: 0.5rem;
+        }
+        .event-date-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 54px;
+        }
+        .event-date-label {
+            font-size: 0.95rem;
+            color: #888;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+        .event-date-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #222;
+        }
+        .event-date-center .event-date-label {
+            font-size: 1.05rem;
+            color: #222;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .event-date-main {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #b38f2a;
+            line-height: 1.1;
+        }
+        .event-date-note {
+            font-size: 0.98rem;
+            color: #888;
+            margin-bottom: 1.1rem;
+        }
+        .event-address {
+            font-size: 0.98rem;
+            color: #444;
+            margin-bottom: 1.1rem;
+        }
+        .event-map {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 1.08rem;
+            color: #b38f2a;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 0.2rem;
+            transition: color 0.2s;
+        }
+        .event-map i {
+            font-size: 1.1em;
+        }
+        .event-map:hover {
+            color: #222;
+        }
+
+        .section-title-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2.2rem;
+            margin-top: 0.5rem;
+            gap: 16px;
+        }
+        .section-title-script {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            font-weight: 400;
+            white-space: nowrap;
+        }
+        .section-title-linebar {
+            flex: 1;
+            height: 2px;
+            background: #222;
+            display: block;
+            min-width: 30px;
+            margin-left: 12px;
+            border-radius: 2px;
+        }
+        @media (max-width: 480px) {
+            .section-title-script { font-size: 1.3rem; }
+            .section-title-linebar { min-width: 16px; }
+        }
+
+        .closing-note {
+            position: relative;
+            max-width: 480px;
+            margin: 2.2rem auto 0 auto;
+            border-radius: 18px;
+            overflow: hidden;
+            min-height: 420px;
+        }
+        .closing-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+            z-index: 1;
+        }
+        .closing-overlay {
+            position: relative;
+            z-index: 2;
+            background: rgba(60,60,60,0.55);
+            color: #fff;
+            padding: 2.2rem 1.2rem 1.5rem 1.2rem;
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .closing-title-wrap {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            margin-bottom: 1.2rem;
+        }
+        .closing-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            font-weight: 400;
+            white-space: nowrap;
+        }
+        .closing-title-underline {
+            flex: 1;
+            height: 2px;
+            background: #fff;
+            display: block;
+            min-width: 30px;
+            border-radius: 2px;
+        }
+        .closing-content {
+            font-family: 'Quicksand', Arial, sans-serif;
+            font-size: 1.01rem;
+            color: #fff;
+            text-align: left;
+            line-height: 1.7;
+            margin-bottom: 2.2rem;
+        }
+        .closing-thank {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            font-weight: 400;
+            text-align: right;
+            position: relative;
+            margin-top: auto;
+            margin-bottom: 0.2rem;
+            color: #fff;
+        }
+        .closing-thank-underline {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 8px;
+            width: 60px;
+            height: 2px;
+            background: #fff;
+            border-radius: 2px;
+            position: relative;
+            top: -6px;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <h1>Cảnh Đệ & Phương Nhung</h1>
+        <p class="save-date">Save The Date</p>
+        <p>04.07.2025</p>
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">00</div>
+                <div class="countdown-label">Ngày</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">00</div>
+                <div class="countdown-label">Giờ</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">00</div>
+                <div class="countdown-label">Phút</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">00</div>
+                <div class="countdown-label">Giây</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="invitation">
+      <div class="invitation-content">
+        <div class="invitation-title">Thân mời!</div>
+        <div class="invitation-subtitle">ĐẾN DỰ LỄ CƯỚI CỦA CHÚNG MÌNH</div>
+        <div class="invitation-month">JULY</div>
+        <div class="invitation-calendar">
+          <div class="calendar-row calendar-header">
+            <div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div><div>SUN</div>
+          </div>
+          <div class="calendar-row">
+            <div></div><div></div><div></div><div></div><div></div><div>1</div><div>2</div>
+          </div>
+          <div class="calendar-row">
+            <div class="calendar-day highlight">3</div>
+            <div class="calendar-day highlight">4</div>
+            <div>5</div><div>6</div><div>7</div><div>8</div><div>9</div>
+          </div>
+          <div class="calendar-row">
+            <div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div>
+          </div>
+          <div class="calendar-row">
+            <div>17</div><div>18</div><div>19</div><div>20</div><div>21</div><div>22</div><div>23</div>
+          </div>
+          <div class="calendar-row">
+            <div>24</div><div>25</div><div>26</div><div>27</div><div>28</div><div>29</div><div>30</div>
+          </div>
+          <div class="calendar-row">
+            <div>31</div><div></div><div></div><div></div><div></div><div></div><div></div>
+          </div>
+        </div>
+        <div class="invitation-desc">
+          Ngày vui sẽ rất tuyệt vời nếu như có thêm sự góp mặt của bạn và người thương. Chúng mình rất hi vọng sẽ có sự tham gia của bạn trong ngày quan trọng này để chứng kiến và chia sẻ niềm hạnh phúc cùng chúng mình!
+        </div>
+      </div>
+    </section>
+
+    <section class="event-info">
+      <div class="event-title">TIỆC THÂN MẬT NHÀ TRAI ĐƯỢC TỔ CHỨC<br>VÀO LÚC 11 GIỜ 00 PHÚT</div>
+      <div class="event-date-row">
+        <div class="event-date-col">
+          <div class="event-date-label">THÁNG</div>
+          <div class="event-date-value">07</div>
+        </div>
+        <div class="event-date-col event-date-center">
+          <div class="event-date-label">THỨ SÁU</div>
+          <div class="event-date-main">04</div>
+        </div>
+        <div class="event-date-col">
+          <div class="event-date-label">NĂM</div>
+          <div class="event-date-value">2025</div>
+        </div>
+      </div>
+      <div class="event-date-note">(Tức ngày 10 tháng 6 năm Giáp Thìn)</div>
+      <div class="event-title event-title-small">LỄ TÂN HÔN ĐƯỢC TỔ CHỨC<br>VÀO LÚC 11 GIỜ 00 PHÚT - NGÀY 03.07.2025<br>TẠI NHÀ HÀNG TIỆC CƯỚI HOÀNG HẢI</div>
+      <div class="event-address">Địa chỉ: Xã Cát Minh, Huyện Phù Cát, Tỉnh Bình Định</div>
+      <a class="event-map" href="#" target="_blank"><i class="fa fa-location-arrow"></i> CHỈ ĐƯỜNG</a>
+    </section>
+
+    <section class="section">
+        <div class="section-title-line">
+            <span class="section-title-script">Album hình cưới</span>
+            <span class="section-title-linebar"></span>
+        </div>
+        <div class="modern-gallery">
+            <div class="gallery-block">
+                <div class="gallery-item large">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wedding Photo 1">
+                </div>
+            </div>
+            <div class="gallery-block row">
+                <div class="gallery-item small">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wedding Photo 2">
+                </div>
+                <div class="gallery-item small">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wedding Photo 3">
+                </div>
+            </div>
+            <div class="gallery-block">
+                <div class="gallery-item medium">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wedding Photo 4">
+                </div>
+            </div>
+            <div class="gallery-block row">
+                <div class="gallery-item small">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wedding Photo 5">
+                </div>
+                <div class="gallery-item small">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wedding Photo 6">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-title-line">
+            <span class="section-title-script">Gửi lời nhắn</span>
+            <span class="section-title-linebar"></span>
+        </div>
+        <div class="modern-form">
+            <form id="rsvpForm">
+                <input type="text" placeholder="Tên của bạn" required>
+                <textarea placeholder="Gửi lời nhắn đến cô dâu chú rể"></textarea>
+                <select required>
+                    <option value="">Bạn sẽ đến chứ?</option>
+                    <option value="yes">Mình chắc chắn sẽ đến</option>
+                    <option value="no">Xin lỗi mình bận rồi!</option>
+                </select>
+                <select required>
+                    <option value="">Bạn tham dự cùng ai?</option>
+                    <option value="1">1 người</option>
+                    <option value="2">2 người</option>
+                    <option value="3">3 người</option>
+                    <option value="4">4 người</option>
+                </select>
+                <select required>
+                    <option value="">Bạn là khách mời của ai?</option>
+                    <option value="bride">Khách mời cô dâu</option>
+                    <option value="groom">Khách mời chú rể</option>
+                </select>
+                <button type="submit">Gửi lời nhắn</button>
+                <button type="button" class="secondary">Mừng cưới</button>
+                <div class="thank-message">Cảm ơn bạn rất nhiều vì đã gửi những lời chúc mừng tốt đẹp nhất đến đám cưới của tụi mình.</div>
+            </form>
+        </div>
+    </section>
+
+    <section class="closing-note">
+      <div class="closing-bg"></div>
+      <div class="closing-overlay">
+        <div class="closing-title-wrap">
+          <span class="closing-title">Lời ngỏ</span>
+          <span class="closing-title-underline"></span>
+        </div>
+        <div class="closing-content">
+          Cảm ơn bạn đã dành tình cảm cho chúng mình! Chúng mình biết các bạn đều đang rất bận rộn, bận với công việc, với cuộc sống và với cả gia đình bạn.<br><br>
+          Nhưng thực sự sẽ rất tuyệt vời nếu như ngày hạnh phúc của chúng mình có thêm sự góp mặt của bạn và người thương. Chúng mình rất hi vọng sẽ có sự tham gia của bạn trong ngày quan trọng này để chứng kiến và chia sẻ niềm hạnh phúc cùng chúng mình.<br><br>
+          Một lần nữa trân thành cảm ơn tất cả mọi người!
+        </div>
+        <div class="closing-thank">
+          Thank you!<span class="closing-thank-underline"></span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-line"></div>
+        <div class="footer-names">Cảnh Đệ & Phương Nhung</div>
+        <div class="footer-year">2025</div>
+    </footer>
+
+    <!-- Nhạc nền tự động -->
+    <audio id="bg-music" src="https://cdn.glitch.global/2e2e2e2e/anhnangcuaanh.mp3" autoplay loop></audio>
+
+    <button id="music-toggle" aria-label="Tắt/mở nhạc" style="position:fixed;bottom:18px;right:18px;z-index:999;background:#fff;border-radius:50%;border:none;box-shadow:0 2px 8px #0002;padding:10px;cursor:pointer;">
+      <i id="music-icon" class="fa fa-music" style="color:#b38f2a;font-size:1.2rem;"></i>
+    </button>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const weddingDate = new Date('2025-07-04T11:00:00');
+            const now = new Date();
+            const difference = weddingDate - now;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // RSVP Form
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Cảm ơn bạn đã gửi lời nhắn!');
+            this.reset();
+        });
+
+        // Music toggle
+        const audio = document.getElementById('bg-music');
+        const btn = document.getElementById('music-toggle');
+        const icon = document.getElementById('music-icon');
+        btn.onclick = function() {
+          if(audio.paused) { audio.play(); icon.className='fa fa-music'; }
+          else { audio.pause(); icon.className='fa fa-pause'; }
+        };
+    </script>
+</body>
+</html>
