@@ -91,6 +91,7 @@
             padding: 8rem 2rem;
             text-align: center;
             position: relative;
+            border-radius: 0 !important;
         }
 
         .section h2 {
@@ -131,12 +132,34 @@
             gap: 12px;
         }
         .gallery-item {
-            border-radius: 14px;
+            border-radius: 0 !important;
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.07);
             background: #fff;
             position: relative;
             transition: transform 0.2s, box-shadow 0.2s;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+        }
+        .gallery-item.visible {
+            opacity: 1;
+            transform: none;
+        }
+        .gallery-item.fade-up { transform: translateY(40px); }
+        .gallery-item.fade-down { transform: translateY(-40px); }
+        .gallery-item.fade-left { transform: translateX(-40px); }
+        .gallery-item.fade-right { transform: translateX(40px); }
+        .gallery-item.zoom-in { transform: scale(0.7); }
+        .gallery-item.rotate-in { transform: rotate(-8deg) scale(0.8); }
+        .gallery-item.visible.fade-up,
+        .gallery-item.visible.fade-down,
+        .gallery-item.visible.fade-left,
+        .gallery-item.visible.fade-right,
+        .gallery-item.visible.zoom-in,
+        .gallery-item.visible.rotate-in {
+            opacity: 1;
+            transform: none;
         }
         .gallery-item img {
             width: 100%;
@@ -174,7 +197,7 @@
             margin: 0 auto;
             padding: 14px 0;
             background: #f7f7f7;
-            border-radius: 18px;
+            border-radius: 0 !important;
             box-shadow: 0 2px 10px rgba(0,0,0,0.06);
         }
         .modern-form form {
@@ -289,7 +312,7 @@
             background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
             color: #fff;
             padding: 2.2rem 1rem 1.5rem 1rem;
-            border-radius: 18px;
+            border-radius: 0 !important;
             max-width: 480px;
             margin: 1.2rem auto 0 auto;
             text-align: center;
@@ -316,6 +339,12 @@
             letter-spacing: 2px;
             margin-bottom: 1.2rem;
             font-weight: 500;
+            background: linear-gradient(90deg, #b38f2a, #ffb347, #b38f2a, #ffb347);
+            background-size: 200% auto;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            animation: gradient-move 2s linear infinite;
         }
         .invitation-desc {
             font-size: 0.98rem;
@@ -364,11 +393,12 @@
             color: #b38f2a;
             font-weight: 700;
             box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            animation: highlight-glow 1.2s infinite alternate;
         }
 
         .event-info {
             background: #faf9f7;
-            border-radius: 18px;
+            border-radius: 0 !important;
             max-width: 480px;
             margin: 1.2rem auto 0 auto;
             text-align: center;
@@ -446,6 +476,7 @@
             text-decoration: none;
             margin-top: 0.2rem;
             transition: color 0.2s;
+            animation: shake 1.2s infinite;
         }
         .event-map i {
             font-size: 1.1em;
@@ -489,7 +520,7 @@
             position: relative;
             max-width: 480px;
             margin: 2.2rem auto 0 auto;
-            border-radius: 18px;
+            border-radius: 0 !important;
             overflow: hidden;
             min-height: 420px;
         }
@@ -498,6 +529,7 @@
             inset: 0;
             background: url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
             z-index: 1;
+            border-radius: 0 !important;
         }
         .closing-overlay {
             position: relative;
@@ -509,6 +541,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            border-radius: 0 !important;
         }
         .closing-title-wrap {
             display: flex;
@@ -600,6 +633,34 @@
         .modern-form select:focus option:checked {
             background: #f7e7b7;
             color: #222;
+        }
+
+        @keyframes gradient-move {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            10% { transform: translateX(-2px); }
+            20% { transform: translateX(2px); }
+            30% { transform: translateX(-2px); }
+            40% { transform: translateX(2px); }
+            50% { transform: translateX(-2px); }
+            60% { transform: translateX(2px); }
+            70% { transform: translateX(-2px); }
+            80% { transform: translateX(2px); }
+            90% { transform: translateX(-2px); }
+            100% { transform: translateX(0); }
+        }
+        @keyframes highlight-glow {
+            0% {
+                box-shadow: 0 0 8px 2px #ffe9a7, 0 1px 4px rgba(0,0,0,0.08);
+                transform: scale(1);
+            }
+            100% {
+                box-shadow: 0 0 18px 6px #ffe9a7, 0 1px 8px rgba(0,0,0,0.13);
+                transform: scale(1.12);
+            }
         }
     </style>
 </head>
@@ -815,6 +876,35 @@
           if(audio.paused) { audio.play(); icon.className='fa fa-music'; }
           else { audio.pause(); icon.className='fa fa-pause'; }
         };
+
+        // Album gallery animation on first load
+        document.addEventListener('DOMContentLoaded', function() {
+          var galleryItems = document.querySelectorAll('.modern-gallery .gallery-item');
+          var effects = ['fade-up', 'fade-down', 'fade-left', 'fade-right', 'zoom-in', 'rotate-in'];
+          galleryItems.forEach(function(item, idx) {
+            var effect = effects[idx % effects.length];
+            item.classList.add(effect);
+          });
+          if ('IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(function(entries) {
+              entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+                } else {
+                  entry.target.classList.remove('visible');
+                }
+              });
+            }, { threshold: 0.18 });
+            galleryItems.forEach(function(item) {
+              observer.observe(item);
+            });
+          } else {
+            // Fallback: Hiện tất cả nếu không hỗ trợ
+            galleryItems.forEach(function(item) {
+              item.classList.add('visible');
+            });
+          }
+        });
     </script>
 </body>
 </html>
