@@ -1715,6 +1715,7 @@
 
             function playMusic() {
                 welcomeOverlay.classList.add('hidden');
+                audio.currentTime = 26; // Bắt đầu phát từ 1:06
                 audio.play().then(() => {
                     musicIcon.className = 'fa fa-music';
                 }).catch(error => {
