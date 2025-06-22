@@ -999,6 +999,14 @@
             transform: scale(1);
         }
 
+        /* Hero image in welcome overlay - always visible */
+        #welcome-overlay .hero-img {
+            opacity: 1;
+            transform: scale(1);
+            max-width: 280px;
+            margin-bottom: 1.5rem;
+        }
+
         /* Form animation */
         .modern-form form {
             opacity: 0;
@@ -1049,6 +1057,92 @@
                 box-shadow: 0 0 18px 6px #ffe9a7, 0 1px 8px rgba(0,0,0,0.13);
                 transform: scale(1.12);
             }
+        }
+
+        /* Welcome Overlay */
+        #welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            font-family: 'Quicksand', Arial, sans-serif;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #welcome-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .overlay-content {
+            transform: translateY(-20px);
+            animation: fadeInContent 1s ease forwards;
+        }
+
+        @keyframes fadeInContent {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .overlay-content h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .overlay-content p {
+            font-size: 1.05rem;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        #enter-site-btn {
+            background: #d4af37;
+            color: #fff;
+            border: 2px solid #d4af37;
+            border-radius: 25px;
+            padding: 12px 35px;
+            font-family: 'Quicksand', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        #enter-site-btn:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+            transform: scale(1.05);
+        }
+
+        .overlay-content span {
+            display: block;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .overlay-content span i {
+            margin-right: 5px;
         }
     </style>
 </head>
@@ -1216,11 +1310,21 @@
         <img src="https://lh3.googleusercontent.com/d/1npVmLdhMbTvCAi7NqgceE5waS-K-hEv2?authuser=1/view" alt="Footer" style="max-width: 100px; width: 100px; height: auto; display: block; margin: 0 auto;" />
     </footer>
 
+    <!-- Welcome Overlay -->
+    <div id="welcome-overlay">
+        <div class="overlay-content">
+            <img class="hero-img" src="https://lh3.googleusercontent.com/d/1G30BIKaC2lutxbUrAUnm7fO_6sWavdES?authuser=1/view" alt="Cảnh Đệ & Phương Nhung" crossorigin="anonymous" />
+            <img class="hero-img" src="https://lh3.googleusercontent.com/d/1Z-aSU1K_px5cvP6Evv02qf3vE6-BV9Ll?authuser=1/view" alt="Cảnh Đệ & Phương Nhung" crossorigin="anonymous" />
+            <button id="enter-site-btn">Khám phá</button>
+            <span><i class="fa fa-volume-up"></i> Bật loa để có trải nghiệm tốt nhất nhé</span>
+        </div>
+    </div>
+
     <!-- Nhạc nền tự động -->
-    <audio id="bg-music" src="https://zingmp3.vn/bai-hat/Anh-Nang-Cua-Anh-Cho-Em-Den-Ngay-Mai-OST-Duc-Phuc/ZW78BW9D.html" autoplay loop></audio>
+    <audio id="bg-music" src="https://docs.google.com/uc?export=open&id=1YjzLc-PiyrS5-kmaxp2qK1_trFpvtjfT" loop></audio>
 
     <button id="music-toggle" aria-label="Tắt/mở nhạc" style="position:fixed;bottom:18px;right:18px;z-index:999;background:#fff;border-radius:50%;border:none;box-shadow:0 2px 8px #0002;padding:10px;cursor:pointer;">
-      <i id="music-icon" class="fa fa-music" style="color:#b38f2a;font-size:1.2rem;"></i>
+      <i id="music-icon" class="fa fa-pause" style="color:#b38f2a;font-size:1.2rem;"></i>
     </button>
 
     <script>
@@ -1251,17 +1355,39 @@
             this.reset();
         });
 
-        // Music toggle
-        const audio = document.getElementById('bg-music');
-        const btn = document.getElementById('music-toggle');
-        const icon = document.getElementById('music-icon');
-        btn.onclick = function() {
-          if(audio.paused) { audio.play(); icon.className='fa fa-music'; }
-          else { audio.pause(); icon.className='fa fa-pause'; }
-        };
-
-        // Smooth scroll animations for all sections
+        // Smooth scroll and music logic
         document.addEventListener('DOMContentLoaded', function() {
+            // Music handling
+            const audio = document.getElementById('bg-music');
+            const musicToggleBtn = document.getElementById('music-toggle');
+            const musicIcon = document.getElementById('music-icon');
+            const welcomeOverlay = document.getElementById('welcome-overlay');
+            const enterBtn = document.getElementById('enter-site-btn');
+
+            if (enterBtn) {
+                enterBtn.addEventListener('click', () => {
+                    welcomeOverlay.classList.add('hidden');
+                    audio.play().then(() => {
+                        musicIcon.className = 'fa fa-music';
+                    }).catch(error => {
+                        console.error("Audio playback failed, user may need to click toggle button.", error);
+                        musicIcon.className = 'fa fa-pause';
+                    });
+                });
+            }
+
+            if (musicToggleBtn) {
+                musicToggleBtn.addEventListener('click', () => {
+                    if (audio.paused) {
+                        audio.play();
+                        musicIcon.className = 'fa fa-music';
+                    } else {
+                        audio.pause();
+                        musicIcon.className = 'fa fa-pause';
+                    }
+                });
+            }
+            
             // Elements to animate
             const elementsToAnimate = [
                 '.hero',
