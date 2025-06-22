@@ -1542,7 +1542,7 @@
     </div>
 
     <!-- Nhạc nền tự động -->
-    <audio id="bg-music" src="https://docs.google.com/uc?export=open&id=1YjzLc-PiyrS5-kmaxp2qK1_trFpvtjfT" loop></audio>
+    <audio id="bg-music" src="./assets/BaiTinhCaDauTien-DuyKhoa_3zw86.mp3" loop></audio>
 
     <button id="music-toggle" aria-label="Tắt/mở nhạc" style="position:fixed;bottom:18px;right:18px;z-index:999;background:#fff;border-radius:50%;border:none;box-shadow:0 2px 8px #0002;padding:10px;cursor:pointer;">
       <i id="music-icon" class="fa fa-pause" style="color:#b38f2a;font-size:1.2rem;"></i>
@@ -1712,32 +1712,21 @@
             const musicToggleBtn = document.getElementById('music-toggle');
             const musicIcon = document.getElementById('music-icon');
             const welcomeOverlay = document.getElementById('welcome-overlay');
-            const enterBtn = document.getElementById('enter-site-btn');
 
-            if (enterBtn) {
-                enterBtn.addEventListener('click', () => {
-                    welcomeOverlay.classList.add('hidden');
-                    audio.play().then(() => {
-                        musicIcon.className = 'fa fa-music';
-                    }).catch(error => {
-                        console.error("Audio playback failed, user may need to click toggle button.", error);
-                        musicIcon.className = 'fa fa-pause';
-                    });
+            function playMusic() {
+                welcomeOverlay.classList.add('hidden');
+                audio.play().then(() => {
+                    musicIcon.className = 'fa fa-music';
+                }).catch(error => {
+                    console.error("Audio playback failed. User interaction might be needed.", error);
+                    musicIcon.className = 'fa fa-pause';
                 });
             }
 
             // Handle clicks on all clickable elements in welcome overlay
             const clickableElements = document.querySelectorAll('#welcome-overlay .clickable, #enter-site-btn');
             clickableElements.forEach(element => {
-                element.addEventListener('click', () => {
-                    welcomeOverlay.classList.add('hidden');
-                    audio.play().then(() => {
-                        musicIcon.className = 'fa fa-music';
-                    }).catch(error => {
-                        console.error("Audio playback failed, user may need to click toggle button.", error);
-                        musicIcon.className = 'fa fa-pause';
-                    });
-                });
+                element.addEventListener('click', playMusic);
             });
             
             if (musicToggleBtn) {
