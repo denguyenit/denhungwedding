@@ -141,25 +141,16 @@
         }
 
         .modern-gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-flow: dense;
+            gap: 12px;
             padding: 0 8px;
             max-width: 480px;
             margin: 0 auto;
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .gallery-block {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .gallery-block.row {
-            flex-direction: row;
-            gap: 12px;
-        }
+        
         .gallery-item {
             border-radius: 0 !important;
             overflow: hidden;
@@ -169,6 +160,9 @@
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
             transform: translateY(40px);
+        }
+        .gallery-item.tall {
+            grid-row: span 2;
         }
         .gallery-item.visible {
             opacity: 1;
@@ -195,16 +189,6 @@
             display: block;
             object-fit: cover;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .gallery-item.large {
-            aspect-ratio: 16/9;
-        }
-        .gallery-item.medium {
-            aspect-ratio: 4/5;
-        }
-        .gallery-item.small {
-            flex: 1;
-            aspect-ratio: 1/1;
         }
         .gallery-item:hover {
             transform: translateY(-5px);
@@ -661,7 +645,7 @@
         .closing-bg {
             position: absolute;
             inset: 0;
-            background: url('https://lh3.googleusercontent.com/d/15ZgWlB-HPV5djIpbKN45nVWrVSPJvZdk?authuser=1/view') center/cover no-repeat;
+            background: url('https://lh3.googleusercontent.com/d/16NZihBIEcI_RZWV9CjTXTcmg3PsOrEzq?authuser=1/view') center/cover no-repeat;
             z-index: 1;
             border-radius: 0 !important;
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1150,31 +1134,26 @@
             <span class="section-title-linebar"></span>
         </div>
         <div class="modern-gallery">
-            <div class="gallery-block">
-                <div class="gallery-item large">
-                    <img src="https://lh3.googleusercontent.com/d/19j1WtrMFM0_s2V3p1ghOVSgxqGJyJh6g?authuser=1/view" alt="Wedding Photo 1">
-                </div>
+            <div class="gallery-item tall">
+                <img src="https://lh3.googleusercontent.com/d/1GPUf5O9odnN0M9e8XSv9AJqVn0J1h8yy?authuser=1/view" alt="Wedding Photo 1">
             </div>
-            <div class="gallery-block row">
-                <div class="gallery-item small">
-                    <img src="https://lh3.googleusercontent.com/d/1_CqriDaNsEZiaK8XLmTtnq9HRA4mN0WX?authuser=1/view" alt="Wedding Photo 2">
-                </div>
-                <div class="gallery-item small">
-                    <img src="https://lh3.googleusercontent.com/d/1hOuQ9bZjlYdmgNtVEzb7_XrhppzCmPm4?authuser=1/view" alt="Wedding Photo 3">
-                </div>
+            <div class="gallery-item">
+                <img src="https://lh3.googleusercontent.com/d/1nEl2Qrrj-kEpUkciPcsC4abShKmvq_In?authuser=1/view" alt="Wedding Photo 2">
             </div>
-            <div class="gallery-block">
-                <div class="gallery-item medium">
-                    <img src="https://lh3.googleusercontent.com/d/1GPUf5O9odnN0M9e8XSv9AJqVn0J1h8yy?authuser=1/view" alt="Wedding Photo 4">
-                </div>
+            <div class="gallery-item">
+                <img src="https://lh3.googleusercontent.com/d/1Q0ttwX3CdC6-JV-lHFkDP1_TOKGvlKTE?authuser=1/view" alt="Wedding Photo 3">
             </div>
-            <div class="gallery-block row">
-                <div class="gallery-item small">
-                    <img src="https://lh3.googleusercontent.com/d/1QeWd7SJ0WMqrkfUMgiJBHPHKaptG--Wm?authuser=1/view" alt="Wedding Photo 5">
-                </div>
-                <div class="gallery-item small">
-                    <img src="https://lh3.googleusercontent.com/d/1Yzz40y7HWPspKRgwLTU5odla_2e4OMUL?authuser=1/view" alt="Wedding Photo 6">
-                </div>
+            <div class="gallery-item">
+                <img src="https://lh3.googleusercontent.com/d/1BKB56FpGU1WgtQ84Ozmb0TnDkH75DI-h?authuser=1/view" alt="Wedding Photo 4">
+            </div>
+            <div class="gallery-item">
+                <img src="https://lh3.googleusercontent.com/d/1ut2QL6RY_qghmeH76KL0w3iN8dvRv7Bg?authuser=1/view" alt="Wedding Photo 5">
+            </div>
+            <div class="gallery-item">
+                <img src="https://lh3.googleusercontent.com/d/1mZY_XHZjm_l-Sjt1tcMbnertVLtAJOv8?authuser=1/view" alt="Wedding Photo 6">
+            </div>
+            <div class="gallery-item">
+                <img src="https://lh3.googleusercontent.com/d/1QlLylgF3YkzYwMF6E2qxgGCyriO5t_QV?authuser=1/view" alt="Wedding Photo 7">
             </div>
         </div>
     </section>
