@@ -1004,7 +1004,7 @@
             opacity: 1;
             transform: scale(1);
             max-width: 280px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0;
         }
 
         /* Form animation */
@@ -1090,6 +1090,12 @@
         .overlay-content {
             transform: translateY(-20px);
             animation: fadeInContent 1s ease forwards;
+            max-width: 90%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
         }
 
         @keyframes fadeInContent {
@@ -1103,58 +1109,56 @@
             font-family: 'Dancing Script', cursive;
             font-size: 2.8rem;
             font-weight: 400;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .overlay-content p {
             font-size: 1.05rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 0;
             letter-spacing: 0.5px;
         }
 
         #enter-site-btn {
-            background: #fff;
-            color: #d4af37;
-            border: 2px solid #d4af37;
-            border-radius: 25px;
-            padding: 12px 35px;
+            background: transparent;
+            color: #802c1e !important;
+            border: none;
+            border-radius: 50%;
+            padding: 20px;
             font-family: 'Quicksand', Arial, sans-serif;
-            font-size: 1rem;
+            font-size: 2rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0;
             letter-spacing: 1px;
             text-transform: uppercase;
-            animation: blink 4s infinite;
         }
 
         #enter-site-btn:hover {
-            background: #d4af37;
-            color: #fff;
+            background: transparent;
+            color: #802c1e !important;
+            transform: scale(1.1);
+        }
+
+        #enter-site-btn img {
+            transition: all 0.3s ease;
+            animation: blink 2s infinite;
+        }
+
+        #enter-site-btn:hover img {
             transform: scale(1.05);
             animation: none;
         }
 
         @keyframes blink {
-            0%, 40% {
-                background: #fff;
-                color: #d4af37;
-                border-color: #d4af37;
-                box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            0%, 50% {
+                opacity: 1;
+                filter: brightness(1) hue-rotate(0deg);
             }
-            50%, 90% {
-                background: #d4af37;
-                color: #fff;
-                border-color: #d4af37;
-                box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-            }
-            100% {
-                background: #fff;
-                color: #d4af37;
-                border-color: #d4af37;
-                box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            25%, 75% {
+                opacity: 0.9;
+                filter: brightness(1.3) hue-rotate(0deg) sepia(1) saturate(2) hue-rotate(340deg);
             }
         }
 
@@ -1166,6 +1170,20 @@
 
         .overlay-content span i {
             margin-right: 5px;
+        }
+
+        .overlay-content .clickable {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .overlay-content .clickable:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        .overlay-content .clickable:active {
+            transform: scale(0.98);
         }
     </style>
 </head>
@@ -1336,9 +1354,9 @@
     <!-- Welcome Overlay -->
     <div id="welcome-overlay">
         <div class="overlay-content">
-            <img class="hero-img" src="https://lh3.googleusercontent.com/d/1G30BIKaC2lutxbUrAUnm7fO_6sWavdES?authuser=1/view" alt="Cảnh Đệ & Phương Nhung" crossorigin="anonymous" />
-            <img class="hero-img" src="https://lh3.googleusercontent.com/d/1Z-aSU1K_px5cvP6Evv02qf3vE6-BV9Ll?authuser=1/view" alt="Cảnh Đệ & Phương Nhung" crossorigin="anonymous" />
-            <button id="enter-site-btn">04.07.2025</button>
+            <img class="hero-img clickable" src="https://lh3.googleusercontent.com/d/1G30BIKaC2lutxbUrAUnm7fO_6sWavdES?authuser=1/view" alt="Cảnh Đệ & Phương Nhung" crossorigin="anonymous" />
+            <img class="hero-img clickable" src="https://lh3.googleusercontent.com/d/1Z-aSU1K_px5cvP6Evv02qf3vE6-BV9Ll?authuser=1/view" alt="Cảnh Đệ & Phương Nhung" crossorigin="anonymous" />
+            <button id="enter-site-btn"><img src="https://lh3.googleusercontent.com/d/1DNThIEL8aQen3-wALnQG4ryMSq_shmfN?authuser=1/view" alt="Mở thiệp" style="width: 300px; height: 100px; object-fit: contain;" /></button>
         </div>
     </div>
 
@@ -1398,6 +1416,20 @@
                 });
             }
 
+            // Handle clicks on all clickable elements in welcome overlay
+            const clickableElements = document.querySelectorAll('#welcome-overlay .clickable, #enter-site-btn');
+            clickableElements.forEach(element => {
+                element.addEventListener('click', () => {
+                    welcomeOverlay.classList.add('hidden');
+                    audio.play().then(() => {
+                        musicIcon.className = 'fa fa-music';
+                    }).catch(error => {
+                        console.error("Audio playback failed, user may need to click toggle button.", error);
+                        musicIcon.className = 'fa fa-pause';
+                    });
+                });
+            });
+            
             if (musicToggleBtn) {
                 musicToggleBtn.addEventListener('click', () => {
                     if (audio.paused) {
