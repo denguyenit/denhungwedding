@@ -42,6 +42,14 @@
             margin: 0 auto;
             border-radius: 0 !important;
             box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .hero.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .hero h1 {
@@ -51,6 +59,7 @@
             letter-spacing: 1px;
             margin-bottom: 0.2rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .hero p.save-date {
@@ -96,6 +105,14 @@
             text-align: center;
             position: relative;
             border-radius: 0 !important;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section h2 {
@@ -104,6 +121,7 @@
             color: #333;
             position: relative;
             display: inline-block;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .section h2::after {
@@ -115,6 +133,11 @@
             width: 60px;
             height: 3px;
             background-color: #d4af37;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .section.visible h2::after {
+            width: 80px;
         }
 
         .modern-gallery {
@@ -124,12 +147,14 @@
             padding: 0 8px;
             max-width: 480px;
             margin: 0 auto;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .gallery-block {
             width: 100%;
             display: flex;
             flex-direction: column;
             gap: 18px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .gallery-block.row {
             flex-direction: row;
@@ -141,10 +166,9 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.07);
             background: #fff;
             position: relative;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
         }
         .gallery-item.visible {
             opacity: 1;
@@ -170,7 +194,7 @@
             height: 100%;
             display: block;
             object-fit: cover;
-            transition: filter 0.2s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .gallery-item.large {
             aspect-ratio: 16/9;
@@ -181,6 +205,13 @@
         .gallery-item.small {
             flex: 1;
             aspect-ratio: 1/1;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
         }
         .gallery-item:active,
         .gallery-item:focus {
@@ -194,6 +225,7 @@
             inset: 0;
             background: linear-gradient(to top,rgba(0,0,0,0.08),transparent 60%);
             pointer-events: none;
+            transition: all 0.3s ease;
         }
 
         .modern-form {
@@ -203,7 +235,16 @@
             background: #f7f7f7;
             border-radius: 0 !important;
             box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px);
         }
+        
+        .modern-form.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         .modern-form form {
             display: flex;
             flex-direction: column;
@@ -219,7 +260,7 @@
             background: #fff;
             font-family: inherit;
             outline: none;
-            transition: border-color 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .modern-form textarea {
             min-height: 70px;
@@ -230,6 +271,8 @@
         .modern-form textarea:focus,
         .modern-form select:focus {
             border-color: #d4af37;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
         }
         .modern-form button,
         .modern-form button.secondary {
@@ -240,6 +283,7 @@
             padding: 7px 0;
             border-radius: 14px;
             border-width: 1px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .modern-form button {
             border: 1.2px solid #222;
@@ -248,13 +292,14 @@
             color: #222;
             padding: 12px 0;
             cursor: pointer;
-            transition: background 0.2s, color 0.2s;
         }
         .modern-form button:hover,
         .modern-form button:focus {
             background: #d4af37;
             color: #fff;
             border-color: #d4af37;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
         }
         .modern-form button.secondary {
             background: #fffdfa;
@@ -267,6 +312,8 @@
             background: #f7e7b7;
             color: #222;
             border-color: #d4af37;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
         }
 
         .footer {
@@ -278,24 +325,41 @@
             font-family: 'Quicksand', Arial, sans-serif;
             font-size: 0.98rem;
             box-shadow: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(20px);
         }
+        
+        .footer.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         .footer-line {
             width: 60px;
             height: 2px;
             background: #e0e0e0;
             margin: 0 auto 0.7rem auto;
             border-radius: 2px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        
+        .footer.visible .footer-line {
+            width: 80px;
+        }
+        
         .footer-names {
             font-family: 'Dancing Script', cursive;
             font-size: 1.25rem;
             color: #b38f2a;
             margin-bottom: 0.1rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .footer-year {
             font-size: 0.95rem;
             color: #aaa;
             letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .thank-message {
@@ -305,6 +369,14 @@
             font-size: 0.98rem;
             color: #888;
             font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        .thank-message.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section .modern-form {
@@ -321,12 +393,22 @@
             margin: 1.2rem auto 0 auto;
             text-align: center;
             box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px);
         }
+        
+        .invitation.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         .invitation-title {
             font-family: 'Dancing Script', cursive;
             font-size: 2rem;
             margin-bottom: 0.2rem;
             font-weight: 400;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .invitation-subtitle {
             font-family: 'Quicksand', Arial, sans-serif;
@@ -335,6 +417,7 @@
             text-transform: uppercase;
             margin-bottom: 0.7rem;
             font-weight: 500;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .invitation-month {
             font-family: 'Quicksand', Arial, sans-serif;
@@ -349,6 +432,7 @@
             background-clip: text;
             -webkit-background-clip: text;
             animation: gradient-move 2s linear infinite;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .invitation-desc {
             font-size: 0.98rem;
@@ -356,6 +440,7 @@
             margin-top: 1.1rem;
             line-height: 1.6;
             font-family: 'Quicksand', Arial, sans-serif;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .invitation-calendar {
             background: rgba(255,255,255,0.13);
@@ -364,12 +449,14 @@
             margin: 0.7rem auto 0.7rem auto;
             max-width: 340px;
             box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .calendar-row {
             display: flex;
             justify-content: center;
             gap: 0.2rem;
             margin-bottom: 2px;
+            transition: all 0.3s ease;
         }
         .calendar-row div,
         .calendar-header div {
@@ -385,6 +472,7 @@
             text-align: center;
             box-sizing: border-box;
             font-family: 'Quicksand', Arial, sans-serif;
+            transition: all 0.3s ease;
         }
         .calendar-header div {
             font-size: 0.72rem;
@@ -398,6 +486,7 @@
             font-weight: 700;
             box-shadow: 0 1px 4px rgba(0,0,0,0.08);
             animation: highlight-glow 1.2s infinite alternate;
+            transition: all 0.3s ease;
         }
 
         .event-info {
@@ -409,19 +498,30 @@
             box-shadow: 0 2px 12px rgba(0,0,0,0.07);
             padding: 2.2rem 1rem 1.5rem 1rem;
             font-family: 'Quicksand', Arial, sans-serif;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px);
         }
+        
+        .event-info.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         .event-title {
             font-size: 1.08rem;
             font-weight: 600;
             letter-spacing: 1px;
             margin-bottom: 1.1rem;
             text-transform: uppercase;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .event-title-small {
             font-size: 1.01rem;
             font-weight: 500;
             margin-top: 1.2rem;
             margin-bottom: 1.1rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .event-date-row {
             display: flex;
@@ -429,12 +529,14 @@
             align-items: flex-end;
             gap: 18px;
             margin-bottom: 0.5rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .event-date-col {
             display: flex;
             flex-direction: column;
             align-items: center;
             min-width: 54px;
+            transition: all 0.3s ease;
         }
         .event-date-label {
             font-size: 0.95rem;
@@ -442,33 +544,39 @@
             font-weight: 500;
             letter-spacing: 1px;
             margin-bottom: 2px;
+            transition: all 0.3s ease;
         }
         .event-date-value {
             font-size: 1.25rem;
             font-weight: 600;
             color: #222;
+            transition: all 0.3s ease;
         }
         .event-date-center .event-date-label {
             font-size: 1.05rem;
             color: #222;
             font-weight: 700;
             margin-bottom: 2px;
+            transition: all 0.3s ease;
         }
         .event-date-main {
             font-size: 2.2rem;
             font-weight: 700;
             color: #b38f2a;
             line-height: 1.1;
+            transition: all 0.3s ease;
         }
         .event-date-note {
             font-size: 0.98rem;
             color: #888;
             margin-bottom: 1.1rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .event-address {
             font-size: 0.98rem;
             color: #444;
             margin-bottom: 1.1rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .event-map {
             display: inline-flex;
@@ -479,14 +587,19 @@
             font-weight: 600;
             text-decoration: none;
             margin-top: 0.2rem;
-            transition: color 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             animation: shake 1.2s infinite;
         }
         .event-map i {
             font-size: 1.1em;
+            transition: all 0.3s ease;
         }
         .event-map:hover {
             color: #222;
+            transform: translateY(-2px);
+        }
+        .event-map:hover i {
+            transform: scale(1.1);
         }
 
         .section-title-line {
@@ -498,12 +611,14 @@
             max-width: 450px;
             margin-left: auto;
             margin-right: auto;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .section-title-script {
             font-family: 'Dancing Script', cursive;
             font-size: 1.3rem;
             font-weight: 400;
             white-space: nowrap;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .section-title-linebar {
             flex: 1;
@@ -514,7 +629,13 @@
             max-width: 60px;
             margin-left: 8px;
             border-radius: 2px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        
+        .section.visible .section-title-linebar {
+            max-width: 80px;
+        }
+        
         @media (max-width: 480px) {
             .section-title-script { font-size: 1.3rem; }
             .section-title-linebar { min-width: 16px; }
@@ -527,13 +648,23 @@
             border-radius: 0 !important;
             overflow: hidden;
             min-height: 420px;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px);
         }
+        
+        .closing-note.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         .closing-bg {
             position: absolute;
             inset: 0;
             background: url('https://lh3.googleusercontent.com/d/15ZgWlB-HPV5djIpbKN45nVWrVSPJvZdk?authuser=1/view') center/cover no-repeat;
             z-index: 1;
             border-radius: 0 !important;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .closing-overlay {
             position: relative;
@@ -546,18 +677,21 @@
             flex-direction: column;
             justify-content: flex-start;
             border-radius: 0 !important;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .closing-title-wrap {
             display: flex;
             align-items: flex-end;
             gap: 12px;
             margin-bottom: 1.2rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .closing-title {
             font-family: 'Dancing Script', cursive;
             font-size: 2rem;
             font-weight: 400;
             white-space: nowrap;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .closing-title-underline {
             flex: 1;
@@ -566,7 +700,13 @@
             display: block;
             min-width: 30px;
             border-radius: 2px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        
+        .closing-note.visible .closing-title-underline {
+            min-width: 50px;
+        }
+        
         .closing-content {
             font-family: 'Quicksand', Arial, sans-serif;
             font-size: 1.01rem;
@@ -574,6 +714,7 @@
             text-align: left;
             line-height: 1.7;
             margin-bottom: 2.2rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .closing-thank {
             font-family: 'Dancing Script', cursive;
@@ -584,6 +725,7 @@
             margin-top: auto;
             margin-bottom: 0.2rem;
             color: #fff;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .closing-thank-underline {
             display: inline-block;
@@ -595,6 +737,11 @@
             border-radius: 2px;
             position: relative;
             top: -6px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .closing-note.visible .closing-thank-underline {
+            width: 80px;
         }
 
         .hero-img {
@@ -604,6 +751,12 @@
             width: 100%;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hero-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
 
         .modern-form select {
@@ -614,7 +767,7 @@
             background: #fff;
             font-family: inherit;
             outline: none;
-            transition: border-color 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             color: #222;
             -webkit-appearance: none;
             -moz-appearance: none;
@@ -637,6 +790,253 @@
         .modern-form select:focus option:checked {
             background: #f7e7b7;
             color: #222;
+        }
+
+        /* Smooth scrolling for the entire page */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Add spacing between sections for better flow */
+        .hero {
+            margin-bottom: 0;
+        }
+        
+        .invitation {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        
+        .event-info {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        
+        .section {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        
+        .closing-note {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        
+        .footer {
+            margin-top: 0;
+        }
+
+        /* Enhanced smooth transitions */
+        .hero, .invitation, .event-info, .section, .closing-note, .footer {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Add subtle gradient overlays for better section separation */
+        .hero::after,
+        .invitation::after,
+        .event-info::after,
+        .section::after,
+        .closing-note::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1));
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero.visible::after,
+        .invitation.visible::after,
+        .event-info.visible::after,
+        .section.visible::after,
+        .closing-note.visible::after {
+            opacity: 1;
+        }
+
+        /* Improved button animations */
+        .modern-form button {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modern-form button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .modern-form button:hover::before {
+            left: 100%;
+        }
+
+        /* Enhanced gallery hover effects */
+        .gallery-item {
+            position: relative;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        /* Smooth text animations */
+        .invitation-title,
+        .invitation-subtitle,
+        .invitation-month,
+        .invitation-desc,
+        .event-title,
+        .event-title-small,
+        .event-date-note,
+        .event-address,
+        .closing-content,
+        .closing-thank {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .invitation.visible .invitation-title,
+        .invitation.visible .invitation-subtitle,
+        .invitation.visible .invitation-month,
+        .invitation.visible .invitation-desc,
+        .event-info.visible .event-title,
+        .event-info.visible .event-title-small,
+        .event-info.visible .event-date-note,
+        .event-info.visible .event-address,
+        .closing-note.visible .closing-content,
+        .closing-note.visible .closing-thank {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Calendar animation */
+        .invitation-calendar {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .invitation.visible .invitation-calendar {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Date row animation */
+        .event-date-row {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .event-info.visible .event-date-row {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Map link animation */
+        .event-map {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .event-info.visible .event-map {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Section title animation */
+        .section-title-line {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section.visible .section-title-line {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Closing title animation */
+        .closing-title-wrap {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .closing-note.visible .closing-title-wrap {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Countdown animation */
+        .countdown {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero.visible .countdown {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero image animation */
+        .hero-img {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero.visible .hero-img {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Form animation */
+        .modern-form form {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modern-form.visible form {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Footer animation */
+        .footer img {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .footer.visible img {
+            opacity: 1;
+            transform: scale(1);
         }
 
         @keyframes gradient-move {
@@ -881,33 +1281,139 @@
           else { audio.pause(); icon.className='fa fa-pause'; }
         };
 
-        // Album gallery animation on first load
+        // Smooth scroll animations for all sections
         document.addEventListener('DOMContentLoaded', function() {
-          var galleryItems = document.querySelectorAll('.modern-gallery .gallery-item');
-          var effects = ['fade-up', 'fade-down', 'fade-left', 'fade-right', 'zoom-in', 'rotate-in'];
-          galleryItems.forEach(function(item, idx) {
-            var effect = effects[idx % effects.length];
-            item.classList.add(effect);
-          });
-          if ('IntersectionObserver' in window) {
-            var observer = new IntersectionObserver(function(entries) {
-              entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                  entry.target.classList.add('visible');
-                } else {
-                  entry.target.classList.remove('visible');
+            // Elements to animate
+            const elementsToAnimate = [
+                '.hero',
+                '.invitation', 
+                '.event-info',
+                '.section',
+                '.modern-form',
+                '.closing-note',
+                '.footer'
+            ];
+            
+            // Create intersection observer for smooth animations
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            
+                            // Add staggered animation for child elements
+                            const children = entry.target.querySelectorAll('.invitation-title, .invitation-subtitle, .invitation-month, .invitation-calendar, .invitation-desc, .event-title, .event-date-row, .event-date-note, .event-address, .event-map, .section-title-line, .closing-title-wrap, .closing-content, .closing-thank');
+                            children.forEach((child, index) => {
+                                setTimeout(() => {
+                                    child.style.opacity = '1';
+                                    child.style.transform = 'translateY(0)';
+                                }, index * 100);
+                            });
+                        }
+                    });
+                }, { 
+                    threshold: 0.15,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+                
+                // Observe all elements
+                elementsToAnimate.forEach(selector => {
+                    const elements = document.querySelectorAll(selector);
+                    elements.forEach(element => {
+                        observer.observe(element);
+                    });
+                });
+            } else {
+                // Fallback: Show all elements immediately
+                elementsToAnimate.forEach(selector => {
+                    const elements = document.querySelectorAll(selector);
+                    elements.forEach(element => {
+                        element.classList.add('visible');
+                    });
+                });
+            }
+
+            // Album gallery animation with improved timing
+            var galleryItems = document.querySelectorAll('.modern-gallery .gallery-item');
+            var effects = ['fade-up', 'fade-down', 'fade-left', 'fade-right', 'zoom-in', 'rotate-in'];
+            
+            galleryItems.forEach(function(item, idx) {
+                var effect = effects[idx % effects.length];
+                item.classList.add(effect);
+            });
+            
+            if ('IntersectionObserver' in window) {
+                var galleryObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry, index) {
+                        if (entry.isIntersecting) {
+                            // Staggered animation for gallery items
+                            setTimeout(() => {
+                                entry.target.classList.add('visible');
+                            }, index * 150);
+                        }
+                    });
+                }, { 
+                    threshold: 0.2,
+                    rootMargin: '0px 0px -30px 0px'
+                });
+                
+                galleryItems.forEach(function(item) {
+                    galleryObserver.observe(item);
+                });
+            } else {
+                // Fallback: Show all gallery items
+                galleryItems.forEach(function(item) {
+                    item.classList.add('visible');
+                });
+            }
+
+            // Add smooth hover effects for interactive elements
+            const interactiveElements = document.querySelectorAll('.gallery-item, .modern-form button, .event-map, .hero-img');
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+            });
+
+            // Add parallax effect to hero section
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero');
+                if (hero) {
+                    const rate = scrolled * -0.5;
+                    hero.style.transform = `translateY(${rate}px)`;
                 }
-              });
-            }, { threshold: 0.18 });
-            galleryItems.forEach(function(item) {
-              observer.observe(item);
             });
-          } else {
-            // Fallback: Hiện tất cả nếu không hỗ trợ
-            galleryItems.forEach(function(item) {
-              item.classList.add('visible');
+
+            // Smooth reveal for thank message
+            const thankMessage = document.querySelector('.thank-message');
+            if (thankMessage) {
+                const thankObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                entry.target.classList.add('visible');
+                            }, 500);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                thankObserver.observe(thankMessage);
+            }
+        });
+
+        // Add smooth scroll behavior for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
-          }
         });
     </script>
 </body>
