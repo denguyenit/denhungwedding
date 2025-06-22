@@ -101,7 +101,7 @@
         }
 
         .section {
-            padding: 8rem 2rem;
+            padding: 4rem 2rem;
             text-align: center;
             position: relative;
             border-radius: 0 !important;
@@ -1185,6 +1185,174 @@
         .overlay-content .clickable:active {
             transform: scale(0.98);
         }
+
+        /* Wedding Gift Popup */
+        #gift-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 10001;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+            font-family: 'Quicksand', Arial, sans-serif;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        #gift-popup.visible {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+        }
+
+        .gift-popup-content {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        #gift-popup.visible .gift-popup-content {
+            transform: scale(1);
+        }
+
+        .gift-popup-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .gift-popup-image:hover {
+            transform: scale(1.02);
+        }
+
+        .gift-popup-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #b38f2a;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .gift-popup-message {
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .gift-popup-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #b38f2a;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .gift-popup-close:hover {
+            background: rgba(179, 143, 42, 0.1);
+            transform: scale(1.1);
+        }
+
+        .gift-popup-close:active {
+            transform: scale(0.95);
+        }
+
+        .gift-popup-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .gift-popup-btn {
+            background: #b38f2a;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-family: 'Quicksand', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gift-popup-btn:hover {
+            background: #8b6d1f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(179, 143, 42, 0.3);
+        }
+
+        .gift-popup-btn.secondary {
+            background: transparent;
+            color: #b38f2a;
+            border: 2px solid #b38f2a;
+        }
+
+        .gift-popup-btn.secondary:hover {
+            background: #b38f2a;
+            color: white;
+        }
+
+        @media (max-width: 480px) {
+            .gift-popup-content {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            .gift-popup-title {
+                font-size: 1.6rem;
+            }
+            
+            .gift-popup-message {
+                font-size: 1rem;
+            }
+            
+            .gift-popup-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .gift-popup-btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1357,6 +1525,19 @@
             <img class="hero-img clickable" src="https://lh3.googleusercontent.com/d/1G30BIKaC2lutxbUrAUnm7fO_6sWavdES?authuser=1/view" alt="Cảnh Đệ & Phương Nhung" crossorigin="anonymous" />
             <img class="hero-img clickable" src="https://lh3.googleusercontent.com/d/1Z-aSU1K_px5cvP6Evv02qf3vE6-BV9Ll?authuser=1/view" alt="Cảnh Đệ & Phương Nhung" crossorigin="anonymous" />
             <button id="enter-site-btn"><img src="https://lh3.googleusercontent.com/d/1DNThIEL8aQen3-wALnQG4ryMSq_shmfN?authuser=1/view" alt="Mở thiệp" style="width: 300px; height: 100px; object-fit: contain;" /></button>
+        </div>
+    </div>
+
+    <!-- Wedding Gift Popup -->
+    <div id="gift-popup">
+        <div class="gift-popup-content">
+            <button class="gift-popup-close" onclick="closeGiftPopup()">
+                <i class="fa fa-times"></i>
+            </button>
+            <img src="https://lh3.googleusercontent.com/d/1ZdeH1NkXruQEIyHumc4pAcQ9rZgTjgae?authuser=1/view" alt="Mừng cưới" class="gift-popup-image" />
+            <div class="gift-popup-message">
+                Cảm ơn bạn đã dành tình cảm cho chúng mình!
+            </div>
         </div>
     </div>
 
@@ -1702,6 +1883,44 @@
                     });
                 }
             });
+        });
+
+        // Wedding Gift Popup Functions
+        function openGiftPopup() {
+            const popup = document.getElementById('gift-popup');
+            popup.classList.add('visible');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeGiftPopup() {
+            const popup = document.getElementById('gift-popup');
+            popup.classList.remove('visible');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Close popup when clicking outside
+        document.getElementById('gift-popup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeGiftPopup();
+            }
+        });
+
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeGiftPopup();
+            }
+        });
+
+        // Connect "Mừng cưới" button to popup
+        document.addEventListener('DOMContentLoaded', function() {
+            const giftButton = document.querySelector('button.secondary');
+            if (giftButton) {
+                giftButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openGiftPopup();
+                });
+            }
         });
     </script>
 </body>
