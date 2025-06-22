@@ -1391,8 +1391,137 @@
         // RSVP Form
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Cảm ơn bạn đã gửi lời nhắn!');
-            this.reset();
+            
+            // Get form data
+            const name = this.querySelector('input[type="text"]').value.trim();
+            const message = this.querySelector('textarea').value.trim();
+            const attendance = this.querySelector('select:nth-of-type(1)').value;
+            const guests = this.querySelector('select:nth-of-type(2)').value;
+            const guestOf = this.querySelector('select:nth-of-type(3)').value;
+            
+            // Validate required fields
+            if (!name) {
+                alert('Vui lòng nhập tên của bạn!');
+                return;
+            }
+            
+            if (!attendance) {
+                alert('Vui lòng chọn bạn có tham dự không!');
+                return;
+            }
+            
+            if (!guests) {
+                alert('Vui lòng chọn số người tham dự!');
+                return;
+            }
+            
+            if (!guestOf) {
+                alert('Vui lòng chọn bạn là khách mời của ai!');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Đang gửi...';
+            submitBtn.disabled = true;
+            
+            // Prepare data for Google Sheets
+            const data = {
+                name: name,
+                message: message,
+                attendance: attendance === 'yes' ? 'Có tham dự' : 'Không tham dự',
+                guests: guests + ' người',
+                guestOf: guestOf === 'bride' ? 'Khách mời cô dâu' : 'Khách mời chú rể'
+            };
+            
+            // Create URL with parameters for GET request
+            const params = new URLSearchParams();
+            params.append('name', data.name);
+            params.append('message', data.message);
+            params.append('attendance', data.attendance);
+            params.append('guests', data.guests);
+            params.append('guestOf', data.guestOf);
+            
+            // Use the correct Google Apps Script URL - replace with your actual script URL
+            const scriptUrl = 'https://script.google.com/macros/s/1LTS5Q79npoef0SCuTXhRNpj4n_Fnn4ZFRFVdiQsht85DbXdMTu1fYFds/exec';
+            const url = `${scriptUrl}?${params.toString()}`;
+            
+            // Method 1: Try using JSONP approach
+            const script = document.createElement('script');
+            script.src = url + '&callback=handleResponse';
+            
+            // Create global callback function
+            window.handleResponse = function(response) {
+                if (response && response.result === 'success') {
+                    // Show success message
+                    alert('🎉 Cảm ơn bạn đã gửi lời nhắn! Chúng mình sẽ ghi nhận và chuẩn bị đón tiếp bạn thật chu đáo.');
+                    document.getElementById('rsvpForm').reset();
+                    
+                    // Show thank message
+                    const thankMessage = document.querySelector('.thank-message');
+                    if (thankMessage) {
+                        thankMessage.classList.add('visible');
+                        // Hide thank message after 5 seconds
+                        setTimeout(() => {
+                            thankMessage.classList.remove('visible');
+                        }, 5000);
+                    }
+                } else {
+                    alert('❌ Có lỗi xảy ra khi gửi lời nhắn. Vui lòng thử lại hoặc liên hệ trực tiếp với chúng mình!');
+                }
+                
+                // Reset button state
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Clean up
+                document.head.removeChild(script);
+                delete window.handleResponse;
+            };
+            
+            // Handle script load error
+            script.onerror = function() {
+                // Fallback: Try direct fetch without CORS
+                fetch(url, {
+                    method: 'GET',
+                    mode: 'no-cors'
+                })
+                .then(() => {
+                    // Since we can't read the response with no-cors, assume success
+                    alert('🎉 Cảm ơn bạn đã gửi lời nhắn! Chúng mình sẽ ghi nhận và chuẩn bị đón tiếp bạn thật chu đáo.');
+                    document.getElementById('rsvpForm').reset();
+                    
+                    // Show thank message
+                    const thankMessage = document.querySelector('.thank-message');
+                    if (thankMessage) {
+                        thankMessage.classList.add('visible');
+                        setTimeout(() => {
+                            thankMessage.classList.remove('visible');
+                        }, 5000);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('❌ Có lỗi xảy ra khi gửi lời nhắn. Vui lòng thử lại hoặc liên hệ trực tiếp với chúng mình!');
+                })
+                .finally(() => {
+                    // Reset button state
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Clean up
+                    if (document.head.contains(script)) {
+                        document.head.removeChild(script);
+                    }
+                    if (window.handleResponse) {
+                        delete window.handleResponse;
+                    }
+                });
+            };
+            
+            // Add script to page to execute the request
+            document.head.appendChild(script);
         });
 
         // Smooth scroll and music logic
