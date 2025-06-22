@@ -1114,8 +1114,8 @@
         }
 
         #enter-site-btn {
-            background: #d4af37;
-            color: #fff;
+            background: #fff;
+            color: #d4af37;
             border: 2px solid #d4af37;
             border-radius: 25px;
             padding: 12px 35px;
@@ -1127,12 +1127,35 @@
             margin-bottom: 1.5rem;
             letter-spacing: 1px;
             text-transform: uppercase;
+            animation: blink 4s infinite;
         }
 
         #enter-site-btn:hover {
-            background: rgba(212, 175, 55, 0.1);
-            color: #d4af37;
+            background: #d4af37;
+            color: #fff;
             transform: scale(1.05);
+            animation: none;
+        }
+
+        @keyframes blink {
+            0%, 40% {
+                background: #fff;
+                color: #d4af37;
+                border-color: #d4af37;
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            }
+            50%, 90% {
+                background: #d4af37;
+                color: #fff;
+                border-color: #d4af37;
+                box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            }
+            100% {
+                background: #fff;
+                color: #d4af37;
+                border-color: #d4af37;
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            }
         }
 
         .overlay-content span {
@@ -1201,7 +1224,7 @@
     </section>
 
     <section class="event-info">
-      <div class="event-title">TIỆC THÂN MẬT NHÀ TRAI ĐƯỢC TỔ CHỨC<br>VÀO LÚC 11 GIỜ 00 PHÚT</div>
+      <div class="event-title">TIỆC NHÀ TRAI ĐƯỢC TỔ CHỨC<br>VÀO LÚC 11 GIỜ 00 PHÚT</div>
       <div class="event-date-row">
         <div class="event-date-col">
           <div class="event-date-label">THÁNG</div>
@@ -1216,7 +1239,7 @@
           <div class="event-date-value">2025</div>
         </div>
       </div>
-      <div class="event-date-note">(Tức ngày 10 tháng 6 năm Giáp Thìn)</div>
+      <div class="event-date-note">(Tức ngày 10 tháng 6 năm Ất Tỵ)</div>
       <div class="event-title event-title-small">LỄ TÂN HÔN ĐƯỢC TỔ CHỨC<br>VÀO LÚC 11 GIỜ 00 PHÚT - NGÀY 04.07.2025<br>TẠI TRUNG TÂM TIỆC CƯỚI NHÀ HÀNG HOÀNG HẢI</div>
       <div class="event-address">Địa chỉ: Đức Phố 1, Phù Cát, Bình Định</div>
       <a class="event-map" href="https://maps.app.goo.gl/c5UVN3kkKN7MebSU6" target="_blank"><i class="fa fa-location-arrow"></i> CHỈ ĐƯỜNG</a>
@@ -1315,8 +1338,7 @@
         <div class="overlay-content">
             <img class="hero-img" src="https://lh3.googleusercontent.com/d/1G30BIKaC2lutxbUrAUnm7fO_6sWavdES?authuser=1/view" alt="Cảnh Đệ & Phương Nhung" crossorigin="anonymous" />
             <img class="hero-img" src="https://lh3.googleusercontent.com/d/1Z-aSU1K_px5cvP6Evv02qf3vE6-BV9Ll?authuser=1/view" alt="Cảnh Đệ & Phương Nhung" crossorigin="anonymous" />
-            <button id="enter-site-btn">Khám phá</button>
-            <span><i class="fa fa-volume-up"></i> Bật loa để có trải nghiệm tốt nhất nhé</span>
+            <button id="enter-site-btn">04.07.2025</button>
         </div>
     </div>
 
